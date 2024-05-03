@@ -67,7 +67,7 @@ void aes128_load_key(int8_t *enc_key,unsigned char* key){
 	
 }
 
-void Rijndael192_encrypt(unsigned char *in,
+void Rijndael256_encrypt(unsigned char *in,
                          unsigned char *out,
                          unsigned char *key,
                         
@@ -141,7 +141,7 @@ void Rijndael192_encrypt(unsigned char *in,
 
    
 }
-void Rijndael192_decrypt(unsigned char *in,
+void Rijndael256_decrypt(unsigned char *in,
                          unsigned char *out,
                          unsigned char *key,
                         
@@ -241,8 +241,8 @@ for(int i=0;i<30;i++)
   
 
     
- Rijndael192_encrypt(plain, computed_cipher, key, 14);
- Rijndael192_decrypt(computed_cipher,decrypt_cipher, key, 14);
+ Rijndael256_encrypt(plain, computed_cipher, key, 14);
+ Rijndael256_decrypt(computed_cipher,decrypt_cipher, key, 14);
  for(int i=0;i<16;i++)
  {
     printf("%02x ",computed_cipher[i]);
