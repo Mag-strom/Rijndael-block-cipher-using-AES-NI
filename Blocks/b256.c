@@ -14,7 +14,7 @@ void print128(__m128i var) {
 
 #define AES_128_key_exp(k, rcon) aes_128_key_expansion(k, _mm_aeskeygenassist_si128(k, rcon))
 
-// static __m128i key_schedule[30];//the expanded key
+
 
 static __m128i aes_128_key_expansion(__m128i key, __m128i keygened){
 	keygened = _mm_shuffle_epi32(keygened, _MM_SHUFFLE(3,3,3,3));
@@ -58,10 +58,7 @@ void aes128_load_key(int8_t *enc_key,unsigned char* key){
 	key_schedule[27] = AES_128_key_exp(key_schedule[26], 0xfa);
 	key_schedule[28] = AES_128_key_exp(key_schedule[27], 0xef);
 	key_schedule[29] = AES_128_key_exp(key_schedule[28], 0xc5);
-    // key_schedule[30] = AES_128_key_exp(key_schedule[29], 0x7d);
-	// key_schedule[31] = AES_128_key_exp(key_schedule[30], 0xfa);
-	// key_schedule[32] = AES_128_key_exp(key_schedule[31], 0xef);
-	// key_schedule[33] = AES_128_key_exp(key_schedule[32], 0xc5);
+
 
 	
 	
@@ -88,20 +85,7 @@ void Rijndael256_encrypt(unsigned char *in,
 		keys[i]= _mm_loadu_si128((__m128i*)(key+(i)*16));
 		
 	}
-    // printf("Key1 : ");
-    // print128(keys[0]);
-    // printf("Key2 : ");
-    // print128(keys[1]);
-    // printf("Key1 : ");
-    // print128(keys[2]);
-    // printf("Key1 : ");
-    // print128(keys[3]);
-    // printf("Key1 : ");
-    // print128(keys[4]);
-    // printf("Key1 : ");
-    // print128(keys[5]);
-    // printf("Key1 : ");
-    // print128(keys[6]);
+   
     data1 = _mm_loadu_si128(&((__m128i*)in)[0]); /* load data block */
  data2 = _mm_loadu_si128(&((__m128i*)in)[1]);
  printf("Data1: ");
@@ -162,20 +146,7 @@ void Rijndael256_decrypt(unsigned char *in,
 		keys[29-i]= _mm_loadu_si128((__m128i*)(key+(i)*16));
 		
 	}
-    // printf("Key1 : ");
-    // print128(k[0]);
-    // printf("Key2 : ");
-    // print128(k[1]);
-    // printf("Key1 : ");
-    // print128(k[2]);
-    // printf("Key1 : ");
-    // print128(k[3]);
-    // printf("Key1 : ");
-    // print128(k[4]);
-    // printf("Key1 : ");
-    // print128(k[5]);
-    // printf("Key1 : ");
-    // print128(k[6]);
+   
     data1 = _mm_loadu_si128(&((__m128i*)in)[0]); /* load data block */
  data2 = _mm_loadu_si128(&((__m128i*)in)[1]);
  printf("Data1: ");
@@ -267,16 +238,12 @@ for(int i=0;i<30;i++)
 
  }
  printf("\n");
-  for(int i = 0; i < 16; i++) {
+  for(int i = 0; i < 32; i++) {
         printf("%c", (char)decrypt_cipher[i]);
     }
     printf("\n");
 
-    // Printing the next 16 bytes as characters
-    for(int i = 16; i < 32; i++) {
-        printf("%c", (char)decrypt_cipher[i]);
-    }
-    printf("\n");
+
 
  return 0;
 }
