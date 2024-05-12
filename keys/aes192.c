@@ -107,10 +107,6 @@ void AES_192_Key_Expansion(const unsigned char* userkey, unsigned char* key) {
     Key_Schedule[28] = temp1;
     Key_Schedule[29] = temp3;
     
-
-    
-
-    // Print all expanded keys
    
 }
 
