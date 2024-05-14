@@ -7,12 +7,17 @@
 
 static __m128i key_schedule[30];//the expanded key
 
-static __m128i aes_128_key_expansion(__m128i key, __m128i keygened){
-	keygened = _mm_shuffle_epi32(keygened, 0xff);
-	key = _mm_xor_si128(key, _mm_slli_si128(key, 4));
-	key = _mm_xor_si128(key, _mm_slli_si128(key, 4));
-	key = _mm_xor_si128(key, _mm_slli_si128(key, 4));
-	return _mm_xor_si128(key, keygened);
+static __m128i aes_128_key_expansion(__m128i temp1, __m128i temp2){
+	__m128i temp3;
+ temp2 = _mm_shuffle_epi32 (temp2 ,0xff);
+ temp3 = _mm_slli_si128 (temp1, 0x4);
+ temp1 = _mm_xor_si128 (temp1, temp3);
+ temp3 = _mm_slli_si128 (temp3, 0x4);
+ temp1 = _mm_xor_si128 (temp1, temp3);
+ temp3 = _mm_slli_si128 (temp3, 0x4);
+ temp1 = _mm_xor_si128 (temp1, temp3);
+ temp1 = _mm_xor_si128 (temp1, temp2);
+ return temp1; 
 }
 
 //public API
