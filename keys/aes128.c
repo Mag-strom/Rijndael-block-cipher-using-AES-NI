@@ -8,7 +8,7 @@
 static __m128i key_schedule[30];//the expanded key
 
 static __m128i aes_128_key_expansion(__m128i key, __m128i keygened){
-	keygened = _mm_shuffle_epi32(keygened, _MM_SHUFFLE(3,3,3,3));
+	keygened = _mm_shuffle_epi32(keygened, 0xff);
 	key = _mm_xor_si128(key, _mm_slli_si128(key, 4));
 	key = _mm_xor_si128(key, _mm_slli_si128(key, 4));
 	key = _mm_xor_si128(key, _mm_slli_si128(key, 4));
